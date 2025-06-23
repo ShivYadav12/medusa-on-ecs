@@ -24,9 +24,3 @@ terraform apply
 
 ### 3. Push to GitHub `main` branch to deploy
 
-## 📹 Video
-
-Please record a Loom/YouTube video explaining:
-- Terraform setup
-- GitHub Actions flow
-- Show deployment working (URL + facecam)
