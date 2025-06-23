@@ -1,0 +1,41 @@
+name: Deploy Medusa to AWS ECS
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Deploy to ECS
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_REGION: us-east-1
+      ECR_REPO: medusa-repo
+      ECS_CLUSTER: medusa-cluster
+      ECS_SERVICE: medusa-service
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v3
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Login to ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build, tag, and push image to ECR
+      run: |
+        docker build -t $ECR_REPO ./docker
+        docker tag $ECR_REPO:latest ${{ steps.login-ecr.outputs.registry }}/${ECR_REPO}:latest
+        docker push ${{ steps.login-ecr.outputs.registry }}/${ECR_REPO}:latest
+
+    - name: Force new ECS deployment
+      run: |
+        aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --force-new-deployment
