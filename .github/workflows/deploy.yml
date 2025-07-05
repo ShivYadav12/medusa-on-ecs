@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      AWS_REGION: us-east-1
+      AWS_REGION: mumbai-region
       ECR_REPO: medusa-repo
       ECS_CLUSTER: medusa-cluster
       ECS_SERVICE: medusa-service
