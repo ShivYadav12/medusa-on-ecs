@@ -2,7 +2,8 @@ name: Deploy Medusa to AWS ECS
 
 on:
   push:
-    branches: [main]
+    branches: 
+            -main
 
 jobs:
   deploy:
