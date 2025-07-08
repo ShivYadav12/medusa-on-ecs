@@ -19,7 +19,7 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-## - is used for some kind of variable
+## - is used for some kind of list orr array element
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v3
       with:
