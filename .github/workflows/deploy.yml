@@ -4,7 +4,7 @@ on:
   push:
     branches: 
             -main
-
+## for manually we can use workflow-dispatch trigger
 jobs:
   deploy:
     name: Deploy to ECS
