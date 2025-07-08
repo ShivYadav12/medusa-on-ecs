@@ -19,7 +19,7 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-
+## - is used for some kind of variable
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v3
       with:
@@ -32,7 +32,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build, tag, and push image to ECR
-      run: |
+      run: | ## this pipe is used to write multiline shell command or somthing
         docker build -t $ECR_REPO ./docker
         docker tag $ECR_REPO:latest ${{ steps.login-ecr.outputs.registry }}/${ECR_REPO}:latest
         docker push ${{ steps.login-ecr.outputs.registry }}/${ECR_REPO}:latest
