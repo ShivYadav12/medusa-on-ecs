@@ -6,7 +6,7 @@ on:
             -main
 ## for manually we can use workflow-dispatch trigger
 jobs:
-  deploy:
+  deploy: ## jobs are steps there mainly three step build test deploy
     name: Deploy to ECS
     runs-on: ubuntu-latest
 
