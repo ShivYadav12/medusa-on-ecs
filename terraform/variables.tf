@@ -1,3 +1,4 @@
+## Declares input variables with types and descriptions
 variable "aws_region" {
   default = "east-1"
 }
